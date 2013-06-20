@@ -1,6 +1,25 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require 'faker'
 require_relative 'db/config'
+
+
+task :console do
+  exec "irb -r./app.rb"
+end
+
+namespace :db do
+  task :seed do
+    require_relative 'app'
+
+    2000.times do
+      Contact.create :first_name => Faker::Name.first_name,
+                     :last_name  => Faker::Name.last_name,
+                     :company    => Faker::Company.name,
+                     :phone      => Faker::PhoneNumber.phone_number
+                     :email      => Faker::Internet.email,
+    end
+  end
 
 
 desc "create the database"
