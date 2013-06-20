@@ -12,5 +12,7 @@ class Contact < ActiveRecord::Base
 
   def area_code
     phone[1..3] #assuming number is given as "(xxx) xxx-xxxx"
+    #can also use .match and regex to filter the first 3 digits .match(/\d{3}(?=\))/)...assuming no 1in front of ()
+    # use (/^[1\D]+?(\d{3})\)?/) if there is a one...thankfully theres no area codes that start with a 1 :D.
   end
 end
